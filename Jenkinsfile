@@ -60,7 +60,7 @@
           if [[ "$SERVICES" -eq 0 ]]; then
             docker network rm docker-ci-cd || true
             docker network create --driver overlay --attachable docker-ci-cd
-            docker service create --replicas 3 --network docker-ci-cd --name docker-ci-cd -p 9098:8080 ${DOCKERHUB_USERNAME}/docker-ci-cd:${BUILD_NUMBER}
+            docker service create --replicas 1 --network docker-ci-cd --name docker-ci-cd -p 9098:8080 ${DOCKERHUB_USERNAME}/docker-ci-cd:${BUILD_NUMBER}
           else
             docker service update --image ${DOCKERHUB_USERNAME}/docker-ci-cd:${BUILD_NUMBER} docker-ci-cd
           fi
